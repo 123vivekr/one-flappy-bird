@@ -1,7 +1,15 @@
 import pygame
-from os import path
+import os
 
 SCREEN_HEIGHT, SCREEN_WIDTH = 512, 284*2 #bg image dim: 284x512
+
+def load_image():
+    img = {}
+    files = (os.listdir(os.path.join('.', 'assets')))
+    files.remove('background.png')
+    for f in files:
+        img[f[:-4]] = pygame.image.load(os.path.join('.','assets', f))
+    return img
 
 def main():
     #init window
@@ -10,10 +18,12 @@ def main():
     pygame.display.set_caption("One Flappy Bird")
 
     # init background
-    bgImg = pygame.image.load(path.join('.','assets','background.png'))
+    bgImg = pygame.image.load(os.path.join('.','assets','background.png'))
     screen.blit(bgImg, (0,0))
     screen.blit(bgImg, (284, 0))
 
+    # cache all images
+    image = load_image()
 
     pygame.display.update();
     pygame.time.delay(10)
