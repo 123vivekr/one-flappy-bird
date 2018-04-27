@@ -6,4 +6,4 @@ install:
   - pip install pygame
 
 script:
-  -python flappybird.py
+  - python flappybird.py
