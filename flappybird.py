@@ -1,5 +1,5 @@
 import pygame
-import os
+import os, sys
 
 SCREEN_HEIGHT, SCREEN_WIDTH = 512, 284*2 #bg image dim: 284x512
 
@@ -45,6 +45,7 @@ def main():
 
     pygame.display.update();
     pygame.time.delay(10)
+    sys.exit()
 
 if __name__ == '__main__':
     main()
