@@ -3,6 +3,12 @@ import os
 
 SCREEN_HEIGHT, SCREEN_WIDTH = 512, 284*2 #bg image dim: 284x512
 
+class Bird:
+    
+    def __init__(x, y, wd):
+        """wd: wing_down image"""
+
+
 def load_image():
     img = {}
     files = (os.listdir(os.path.join('.', 'assets')))

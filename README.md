@@ -1,4 +1,4 @@
 # Flappy Bird in Python
-Recreate the python version of Flappy bird
-Using python module- pygame
+A Flappy Bird Clone made with Python
 
+This game is built upon Pygame library. Feel free to fork this repo and/or contribute
