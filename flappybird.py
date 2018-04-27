@@ -4,7 +4,7 @@ import os
 SCREEN_HEIGHT, SCREEN_WIDTH = 512, 284*2 #bg image dim: 284x512
 
 class Bird(pygame.sprite.Sprite):
-    
+
     def __init__(self, x, y, img):
         super(Bird, self).__init__()
         self.x, self.y = x, y
