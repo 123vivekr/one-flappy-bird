@@ -22,14 +22,7 @@ class Pipe(pygame.sprite.Sprite):
         self.imgbody_mask, self.imgdown_mask = pygame.mask.from_surface(self.imgbody), pygame.mask.from_surface(self.imgend)
 
 def load_image():
-    img = {}
-    files = (os.listdir(os.path.join('.', 'assets')))
-    files.remove('background.png')
-    for f in files:
-        i = pygame.image.load(os.path.join('.','assets', f))
-        i.convert_alpha()
-        img[f[:-4]] = i
-    return img
+    return {f[:-4]: pygame.image.load(os.path.join('.','assets', f)).convert_alpha() for f in os.listdir(os.path.join('.', 'assets'))}
 
 def main():
     #init window
@@ -37,13 +30,13 @@ def main():
     screen = pygame.display.set_mode( (SCREEN_WIDTH, SCREEN_HEIGHT) )
     pygame.display.set_caption("One Flappy Bird")
 
-    # init background
-    bgImg = pygame.image.load(os.path.join('.','assets','background.png'))
-    screen.blit(bgImg, (0,0))
-    screen.blit(bgImg, (284, 0))
-
     # cache all images
     image = load_image()
+
+    # init background
+    screen.blit(image['background'], (0,0))
+    screen.blit(image['background'], (284, 0))
+
 
     #initialise Bird
     birdy = Bird(0, SCREEN_HEIGHT/2, (image['bird_wing_up'], image['bird_wing_down']))
