@@ -14,6 +14,13 @@ class Bird(pygame.sprite.Sprite):
     def display(self, screen):
         screen.blit(self.imgdown, (self.x, self.y))
 
+class Pipe(pygame.sprite.Sprite):
+
+    def init(self, img):
+        super(Bird, self).__init__()
+        self.imgbody, self.imgend = img
+        self.imgbody_mask, self.imgdown_mask = pygame.mask.from_surface(self.imgbody), pygame.mask.from_surface(self.imgend)
+
 def load_image():
     img = {}
     files = (os.listdir(os.path.join('.', 'assets')))
