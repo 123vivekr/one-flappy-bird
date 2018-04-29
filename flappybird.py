@@ -36,7 +36,8 @@ def main():
     # init background
     screen.blit(image['background'], (0,0))
     screen.blit(image['background'], (284, 0))
-
+    ground_scale = pygame.transform.scale(image['ground'], (int(SCREEN_WIDTH), int(SCREEN_HEIGHT/5)))
+    screen.blit(ground_scale, (0, SCREEN_HEIGHT-90))
 
     #initialise Bird
     birdy = Bird(0, SCREEN_HEIGHT/2, (image['bird_wing_up'], image['bird_wing_down']))
@@ -44,7 +45,7 @@ def main():
     birdy.display(screen)
 
     pygame.display.update();
-    pygame.time.delay(10)
+    pygame.time.delay(1000)
 
 if __name__ == '__main__':
     main()
