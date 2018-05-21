@@ -1,7 +1,9 @@
 import pygame
 import os
+from math import pi, cos, sin, radians
 
 SCREEN_HEIGHT, SCREEN_WIDTH = 512, 284*2 #bg image dim: 284x512
+UP_ARROW, SPACE = 273, 32 #keyboard mapping
 
 class Bird(pygame.sprite.Sprite):
 
@@ -15,10 +17,15 @@ class Bird(pygame.sprite.Sprite):
         screen.blit(self.imgdown, (self.x, self.y))
 
     def fall(self):
-        self.y += 15
+        for i in range(0, 5):
+            self.y += i
+            pygame.display.update()
 
     def jump(self):
-        self.y-=10
+        for i in range(60, 0, -30):
+            self.y -= i
+            pygame.display.update()
+            
 
 class Pipe(pygame.sprite.Sprite):
 
@@ -27,8 +34,6 @@ class Pipe(pygame.sprite.Sprite):
         self.imgbody, self.imgend = img
         self.imgbody_mask, self.imgdown_mask = pygame.mask.from_surface(self.imgbody), pygame.mask.from_surface(self.imgend)
     
-    
-
 def load_image():
     return {f[:-4]: pygame.image.load(os.path.join('.','assets', f)).convert_alpha() for f in os.listdir(os.path.join('.', 'assets'))}
 
@@ -57,13 +62,18 @@ def main():
 
     #game loop
     while not crashed:
+        pygame.display.update()
         background(screen, image['background'], image['ground'])
         birdy.display(screen)
-        pygame.display.update();
-        birdy.fall()
         
-        print("loop")
-        clock.tick(30)
+        birdy.fall()
+        event = pygame.event.get()
+        for e in event:
+            press = e.dict.keys()
+            if('key' in press and 'unicode' not in press):
+                if(e.dict['key'] in [SPACE, UP_ARROW]):
+                    birdy.jump()
+        clock.tick(20)
 
     pygame.quit()
 
