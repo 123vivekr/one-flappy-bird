@@ -73,6 +73,8 @@ def main():
             if('key' in press and 'unicode' not in press):
                 if(e.dict['key'] in [SPACE, UP_ARROW]):
                     birdy.jump()
+            if(not press):
+                crashed = True
         clock.tick(20)
 
     pygame.quit()
