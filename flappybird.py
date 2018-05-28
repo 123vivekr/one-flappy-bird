@@ -59,7 +59,6 @@ class Pipe(pygame.sprite.Sprite):
             screen.blit(self.imgbody, (SCREEN_WIDTH - Pipe.WIDTH - x, i * Pipe.PIECE_HEIGHT))
         screen.blit(self.imgend, (SCREEN_WIDTH - Pipe.WIDTH - x, self.top_pieces * Pipe.PIECE_HEIGHT))
 
-
 def load_image():
     return {f[:-4]: pygame.image.load(os.path.join('.','assets', f)).convert_alpha() for f in os.listdir(os.path.join('.', 'assets'))}
 
@@ -90,14 +89,22 @@ def main():
     clock = pygame.time.Clock()
 
     x = 0
+    x2 = x - Pipe.WIDTH * randint(1, 8)
     #game loop
     while not crashed:
-        x += 1
+        x += 10 #pipe speed
+        x2 += 10
         pygame.display.update()
         background(screen, image['background'], image['ground'])
-        
-        pipe.display(screen, x)
+        pipeLocomotion =  x % (500 + Pipe.WIDTH) - 15
+        pipe.display(screen, pipeLocomotion)
         birdy.display(screen)
+        xy2 = x2 % (500 + Pipe.WIDTH) - 15
+        # if xy2 == -15:
+            # val = randint(100, 500)
+            # print(val)
+            # xy2 = val
+        pipe.display(screen, xy2)
         birdy.fall()
         event = pygame.event.get()
         for e in event:
@@ -107,7 +114,7 @@ def main():
                     birdy.jump()
             if(not press):
                 crashed = True
-        clock.tick(20)
+        clock.tick(30)
 
     pygame.quit()
 
